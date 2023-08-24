@@ -5,7 +5,7 @@ import {useMutation} from "@tanstack/react-query";
 function Login() {
 
 	const userLoginInfo = async (info:any) => {
-		const {data} = await axios.post("http://localhost:3006/login", info);
+		const {data} = await axios.post("/login", info);
 		return data;
 	}
 
