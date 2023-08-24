@@ -3,3 +3,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'NanumSquareNeo-Variable';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@layer base {
+	html {
+		font-family: 'NanumSquareNeo-Variable', system-ui, sans-serif;
+	}
+	input[type="text"], input[type="password"], input[type="number"] {
+		@apply block w-full border h-12 px-2
+	}
+}
+
+@layer components {
+	.logo {
+		@apply bg-lime-600 text-white text-base px-2 py-1.5 rounded mx-2 rotate-6;
+	}
+}
