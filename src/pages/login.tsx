@@ -1,30 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
 
 function Login() {
+	const [id, setId] = useState("");
+	const [password, setPassword] = useState("");
 
-	const userLoginInfo = async (info:any) => {
+	const changeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setId(e.target.value);
+	}
+
+	const changePassword = (e:React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.target.value);
+	}
+
+	const userLoginInfo = async (info:object) => {
 		const {data} = await axios.post("/login", info);
 		return data;
 	}
 
 	const {mutate, isSuccess, isError} = useMutation(userLoginInfo, {
-		onMutate: (variables) => {
-			console.log("onMutate", variables);
-		},
 		onSuccess: (data, variables, context) => {
-			console.log(data)
-			console.log(variables)
-			console.log(context)
+			const {token} = data;
+			localStorage.setItem("token", token);
+
 		},
 		onError: (error, variables, context) => {
-			console.log(error);
+			alert("계정 정보가 일치하지 않습니다.");
 		}
 	});
 
 	const login = () => {
-		mutate({ id: 1 });
+		if(!id || id.trim() === "") {
+			alert("아이디를 입력하세요.");
+			return false;
+		}
+		if(!password || password.trim() === "") {
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+
+		mutate({ id: id, password: password });
 	}
 
 	return (
@@ -33,10 +49,10 @@ function Login() {
 				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">관리자 시스템</h2>
 				<div className="mt-2">
-					<input id="id" type="text" required className="text-sm" placeholder="아이디를 입력해 주세요."/>
+					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." value={id} onChange={changeId}/>
 				</div>
 				<div className="mt-2">
-					<input id="password" type="password" required className="text-sm" placeholder="비밀번호를 입력해 주세요."/>
+					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." value={password} onChange={changePassword}/>
 				</div>
 				<div className="mt-6">
 					<button type="button" className="bg-lime-600 text-white w-full h-12" onClick={login}>로그인</button>
