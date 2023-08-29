@@ -1,17 +1,25 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
-	const [id, setId] = useState("");
-	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
-	const changeId = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setId(e.target.value);
-	}
+	const [user, setUser] = useState({
+		id: "",
+		password: ""
+	});
 
-	const changePassword = (e:React.ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.target.value);
+	const {id, password} = user;
+
+	const changeUser = (e:React.ChangeEvent<HTMLInputElement>) => {
+		const {value, name} = e.target;
+
+		setUser({
+			...user,
+			[name]: value
+		});
 	}
 
 	const userLoginInfo = async (info:object) => {
@@ -23,6 +31,7 @@ function Login() {
 		onSuccess: (data, variables, context) => {
 			const {token} = data;
 			localStorage.setItem("token", token);
+			navigate("/reserve/list");
 
 		},
 		onError: (error, variables, context) => {
@@ -49,10 +58,10 @@ function Login() {
 				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">관리자 시스템</h2>
 				<div className="mt-2">
-					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." value={id} onChange={changeId}/>
+					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" value={id} onChange={changeUser}/>
 				</div>
 				<div className="mt-2">
-					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." value={password} onChange={changePassword}/>
+					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" value={password} onChange={changeUser}/>
 				</div>
 				<div className="mt-6">
 					<button type="button" className="bg-lime-600 text-white w-full h-12" onClick={login}>로그인</button>
