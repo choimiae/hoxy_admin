@@ -13,10 +13,10 @@ type TabCpType = {
 
 function Tab({data} : TabCpType) {
 	return(
-		<div className="mb-10">
+		<div className="mb-8">
 			{
 				data.map((item, index:number) => (
-					<NavLink key={index} to={item.link} className={`text-base mr-2 px-4 inline-flex items-center justify-center text-white h-10 ${item.activeFlag ? "bg-slate-500" : "bg-gray-300"}`}>{item.name}</NavLink>
+					<NavLink key={index} to={item.link} className={`mr-2 px-4 inline-flex items-center justify-center text-white h-10 ${item.activeFlag ? "bg-slate-500" : "bg-gray-300"}`}>{item.name}</NavLink>
 				))
 			}
 		</div>
