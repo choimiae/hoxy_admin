@@ -13,7 +13,7 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<Routes>
 				<Route path="/" element={<Login/>} />
-				<Route path="/reserve/list" element={<ReserveList />} />
+				<Route path="/manage/reserve/list" element={<ReserveList />} />
 			</Routes>
 			<ReactQueryDevtools />
 		</QueryClientProvider>

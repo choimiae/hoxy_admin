@@ -5,8 +5,8 @@ import Tab from "../../components/tab";
 
 function ReserveList() {
 	const tabData = [
-		{name: "예약 확인", link: "/reserve/list", activeFlag: true},
-		{name: "예약 통계", link: "/reserve/stats", activeFlag: false}
+		{name: "예약 확인", link: "/manage/reserve/list", activeFlag: true},
+		{name: "예약 통계", link: "/manage/reserve/stats", activeFlag: false}
 	]
 
 	return (

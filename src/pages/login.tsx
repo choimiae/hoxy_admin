@@ -31,7 +31,7 @@ function Login() {
 		onSuccess: (data, variables, context) => {
 			const {token} = data;
 			localStorage.setItem("token", token);
-			navigate("/reserve/list");
+			navigate("/manage/reserve/list");
 
 		},
 		onError: (error, variables, context) => {
