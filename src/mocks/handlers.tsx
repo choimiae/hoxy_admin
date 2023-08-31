@@ -22,6 +22,31 @@ let reserveList = [
 	}
 ]
 
+let reserveStatsList = [
+	{
+		idx: "qwertyy",
+		name: "이민기",
+		phone: "010-5555-6666",
+		count: Number(3),
+		date: "2023-09-01 11:00:00",
+		checkFlag: false
+	},{
+		idx: "12121212212",
+		name: "홍길동",
+		phone: "010-1234-5678",
+		count: Number(10),
+		date: "2023-09-01 11:00:00",
+		checkFlag: true
+	},{
+		idx: "5555555",
+		name: "이수근",
+		phone: "010-0000-0000",
+		count: Number(1),
+		date: "2023-09-05 11:00:00",
+		checkFlag: false
+	}
+]
+
 export const handlers = [
 	// 로그인
 	rest.post("/login", (req:any, res:any, ctx:any) => {
@@ -44,5 +69,13 @@ export const handlers = [
 		reserveList = reserveList.filter(item => item.idx !== idx);
 
 		return res(ctx.status(201), ctx.json(`${idx} 예약 건이 ${checkFlag ? "수락" : "거절"}되었습니다.`));
-	})
+	}),
+
+	// 예약 통계 목록 조회
+	rest.post("/manage/reserve/stats", (req:any, res:any, ctx:any) => {
+		const changeFormat = new Date(req.body).toISOString().split("T")[0];
+		const reserveStatsListFilter = reserveStatsList.filter(item => new Date(item.date).toISOString().split("T")[0] === changeFormat);
+
+		return res(ctx.status(201), ctx.json(reserveStatsListFilter));
+	}),
 ]

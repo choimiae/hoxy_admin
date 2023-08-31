@@ -7,11 +7,11 @@ import Tab from "../../components/tab";
 
 function ReserveList() {
 	type ReserveListType = {
-		idx: String,
-		name: String,
-		phone: String,
-		count: Number,
-		date: String
+		idx: string,
+		name: string,
+		phone: string,
+		count: number,
+		date: string
 	}
 
 	type ReserveCheckType = {
@@ -45,7 +45,7 @@ function ReserveList() {
 		})
 	})
 
-	const reserveHandler = (idx:String, checkFlag: boolean) => {
+	const reserveHandler = (idx:string, checkFlag: boolean) => {
 		reserveCheckMutate({idx, checkFlag})
 	}
 

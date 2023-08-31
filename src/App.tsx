@@ -5,6 +5,7 @@ import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import Login from "./pages/login";
 import "./index.css";
 import ReserveList from "./pages/reserve/reserveList";
+import ReserveStats from "./pages/reserve/reserveStats";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Login/>} />
 				<Route path="/manage/reserve/list" element={<ReserveList />} />
+				<Route path="/manage/reserve/stats" element={<ReserveStats />} />
 			</Routes>
 			<ReactQueryDevtools />
 		</QueryClientProvider>
