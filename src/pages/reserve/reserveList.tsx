@@ -29,7 +29,7 @@ function ReserveList() {
 		return res.data;
 	}
 
-	const reserveListDb = useQuery(["reserveList"], reserveListDispatch);
+	const {data : reserveListDb} = useQuery(["reserveList"], reserveListDispatch);
 
 	const reserveCheckDispatch = async (info:ReserveCheckType) => {
 		const {data} = await axios.post("/manage/reserve/check", info);
@@ -75,10 +75,10 @@ function ReserveList() {
 					</thead>
 					<tbody>
 					{
-						reserveListDb.data?.map((item : ReserveListType, index : number) => {
+						reserveListDb?.map((item : ReserveListType, index : number) => {
 							return (
 								<tr className="border-b border-slate-100" key={index}>
-									<td className="px-2 py-3">{reserveListDb.data.length - index}</td>
+									<td className="px-2 py-3">{reserveListDb.length - index}</td>
 									<td className="px-2 py-3">{item.name}</td>
 									<td className="px-2 py-3">{item.phone}</td>
 									<td className="px-2 py-3">{Number(item.count)}명</td>
