@@ -1,12 +1,16 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 function Login() {
+	type UserType = {
+		id: string,
+		password: string
+	}
 	const navigate = useNavigate();
 
-	const [user, setUser] = useState({
+	const [user, setUser] = useState<UserType>({
 		id: "",
 		password: ""
 	});
@@ -23,7 +27,7 @@ function Login() {
 	}
 
 	const userLoginInfo = async (info:object) => {
-		const {data} = await axios.post("/login", info);
+		const {data} = await axios.post("/manage/login", info);
 		return data;
 	}
 
@@ -54,7 +58,7 @@ function Login() {
 
 	return (
 		<main className="flex items-center justify-center h-screen text-center bg-slate-50">
-			<div className="inline-flex flex-col basis-80">
+			<div className="inline-flex flex-col basis-3/6">
 				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">관리자 시스템</h2>
 				<div className="mt-2">
@@ -65,6 +69,9 @@ function Login() {
 				</div>
 				<div className="mt-6">
 					<button type="button" className="bg-lime-600 text-white w-full h-12" onClick={login}>로그인</button>
+				</div>
+				<div className="mt-6">
+					<NavLink to="/manage/join" className="underline text-gray-500">회원가입</NavLink>
 				</div>
 			</div>
 		</main>

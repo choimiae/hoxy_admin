@@ -1,5 +1,18 @@
 import {rest} from "msw";
 
+const storeList = [
+	{
+		idx: "storeidx1",
+		name: "탐앤탐스"
+	},{
+		idx: "storeidx2",
+		name: "투썸플레이스"
+	},{
+		idx: "storeidx3",
+		name: "스타벅스"
+	}
+]
+
 let reserveList = [
 	{
 		idx: "jsdsdakdjkads",
@@ -49,13 +62,18 @@ let reserveStatsList = [
 
 export const handlers = [
 	// 로그인
-	rest.post("/login", (req:any, res:any, ctx:any) => {
+	rest.post("/manage/login", (req:any, res:any, ctx:any) => {
 		const {id, password} = req.body;
 		if(id === "admin" && password === "1234") {
 			return res(ctx.status(201), ctx.json({token: "123456789"}));
 		} else {
 			return res(ctx.status(401));
 		}
+	}),
+
+	// 회원가입 - 업체 idx 목록 조회
+	rest.get("/manage/join", (req:any, res:any, ctx:any) => {
+		return res(ctx.status(200), ctx.json(storeList));
 	}),
 
 	// 예약 목록 조회
