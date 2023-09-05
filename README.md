@@ -18,6 +18,8 @@ ex) 테이블링
 <br/>
 
 ## 📷 Screen Shot 📷
-![Hoxy_로그인](https://github.com/choimiae/hoxy_admin/assets/93104994/182e5fb8-d83c-41c5-85a0-865157a6f82b)
-![Hoxy_목록](https://github.com/choimiae/hoxy_admin/assets/93104994/8add80c5-ec96-4a34-9cbb-20ecb34226f0)
-![Hoxy_통계](https://github.com/choimiae/hoxy_admin/assets/93104994/a735ecb6-99b1-4d72-a183-c86f4e1ab600)
+<div>
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/182e5fb8-d83c-41c5-85a0-865157a6f82b" width="320"/>
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/8add80c5-ec96-4a34-9cbb-20ecb34226f0" width="320" />
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/a735ecb6-99b1-4d72-a183-c86f4e1ab600" width="320" />
+</div>
