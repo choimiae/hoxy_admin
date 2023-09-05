@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# [토이프로젝트] Hoxy_예약되나요 (관리자 시스템)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+직접 방문 전에 미리 줄 서기! ex) 테이블링
+1. 회원가입
+2. 로그인 / 로그아웃
+3. 실시간 예약 목록 조회
+4. 예약 수락 / 거절
+5. 일자별 예약 통계 조회
 
 ## Available Scripts
 
