@@ -72,8 +72,15 @@ export const handlers = [
 	}),
 
 	// 회원가입 - 업체 idx 목록 조회
-	rest.get("/manage/join", (req:any, res:any, ctx:any) => {
+	rest.get("/manage/store", (req:any, res:any, ctx:any) => {
 		return res(ctx.status(200), ctx.json(storeList));
+	}),
+
+	// 회원가입 처리
+	rest.post("/manage/join", (req:any, res:any, ctx:any) => {
+		const {nickname} = req.body;
+
+		return res(ctx.status(201), ctx.json(`${nickname}님 회원가입이 완료되었습니다.`));
 	}),
 
 	// 예약 목록 조회

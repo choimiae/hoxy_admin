@@ -58,7 +58,7 @@ function Login() {
 
 	return (
 		<main className="flex items-center justify-center h-screen text-center bg-slate-50">
-			<div className="inline-flex flex-col basis-3/6">
+			<div className="inline-flex flex-col basis-2/6">
 				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">관리자 시스템</h2>
 				<div className="mt-2">

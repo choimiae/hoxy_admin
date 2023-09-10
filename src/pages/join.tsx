@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
-import {useQuery} from "@tanstack/react-query";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useMutation, useQuery} from "@tanstack/react-query";
 
 function Join() {
 	type JoinType = {
@@ -17,6 +17,8 @@ function Join() {
 		name: string
 	}
 
+	const navigate = useNavigate();
+
 	const [join, setJoin] = useState<JoinType>({
 		id: "",
 		password: "",
@@ -24,10 +26,6 @@ function Join() {
 		storeIdx: "",
 		nickname: ""
 	});
-
-	useEffect(() => {
-
-	}, []);
 
 	const {id, password, passwordConfirm, storeIdx, nickname} = join;
 
@@ -41,11 +39,26 @@ function Join() {
 	};
 
 	const storeListDispatch = async () => {
-		const res = await axios.get("/manage/join");
+		const res = await axios.get("/manage/store");
 		return res.data;
 	}
 
 	const {data : storeListDb} = useQuery(["storeList"], storeListDispatch);
+
+	const joinDispatch = async (info:JoinType) => {
+		const {data} = await axios.post("/manage/join", info);
+		return data;
+	}
+
+	const {mutate:joinMutate} = useMutation(joinDispatch, {
+		onSuccess: ((data) => {
+			alert(data);
+			navigate("/");
+		}),
+		onError: (error => {
+			alert(error);
+		})
+	})
 
 	const joinHandler = () => {
 		if(!id || id.trim() === "") {
@@ -60,6 +73,10 @@ function Join() {
 			alert("비밀번호 확인을 입력하세요.");
 			return false;
 		}
+		if(password.trim() !== passwordConfirm.trim()) {
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		}
 		if(!storeIdx || storeIdx.trim() === "") {
 			alert("업체명을 선택하세요.");
 			return false;
@@ -68,11 +85,19 @@ function Join() {
 			alert("닉네임을 입력하세요.");
 			return false;
 		}
+
+		joinMutate({
+			id: id,
+			password: password,
+			passwordConfirm: passwordConfirm,
+			storeIdx: storeIdx,
+			nickname: nickname
+		})
 	}
 
 	return(
 		<main className="flex items-center justify-center h-screen text-center bg-slate-50">
-			<div className="inline-flex flex-col basis-3/6">
+			<div className="inline-flex flex-col basis-2/6">
 				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">회원가입</h2>
 				<div className="mt-2 flex items-center">
