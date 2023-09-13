@@ -7,9 +7,12 @@ function Join() {
 	type JoinType = {
 		id: string,
 		password: string,
-		passwordConfirm: string,
 		storeIdx: string,
 		nickname: string
+	}
+
+	type JoinCheckType = JoinType & {
+		passwordConfirm: string
 	}
 
 	type StoreType = {
@@ -19,7 +22,7 @@ function Join() {
 
 	const navigate = useNavigate();
 
-	const [join, setJoin] = useState<JoinType>({
+	const [join, setJoin] = useState<JoinCheckType>({
 		id: "",
 		password: "",
 		passwordConfirm: "",
@@ -89,7 +92,6 @@ function Join() {
 		joinMutate({
 			id: id,
 			password: password,
-			passwordConfirm: passwordConfirm,
 			storeIdx: storeIdx,
 			nickname: nickname
 		})
