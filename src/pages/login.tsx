@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
 import {NavLink, useNavigate} from "react-router-dom";
+import {userInfo} from "../components/user";
 
 function Login() {
 	type UserType = {
@@ -33,8 +34,8 @@ function Login() {
 
 	const {mutate, isSuccess, isError} = useMutation(userLoginInfo, {
 		onSuccess: (data, variables, context) => {
-			const {token} = data;
-			localStorage.setItem("token", token);
+			const {token, name} = data;
+			userInfo.setUser({token: token, name: name});
 			navigate("/manage/reserve/list");
 
 		},
