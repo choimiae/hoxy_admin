@@ -7,6 +7,8 @@ import "./index.css";
 import ReserveList from "./pages/reserve/reserveList";
 import ReserveStats from "./pages/reserve/reserveStats";
 import Join from "./pages/join";
+import AuthRouter from "./authRouter";
+import NotFound from "./pages/notFound";
 
 const queryClient = new QueryClient();
 
@@ -14,10 +16,13 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Routes>
+				<Route path="*" element={<NotFound/>} />
 				<Route path="/" element={<Login/>} />
 				<Route path="/manage/join" element={<Join/>} />
-				<Route path="/manage/reserve/list" element={<ReserveList />} />
-				<Route path="/manage/reserve/stats" element={<ReserveStats />} />
+				<Route element={<AuthRouter/>}>
+					<Route path="/manage/reserve/list" element={<ReserveList />} />
+					<Route path="/manage/reserve/stats" element={<ReserveStats />} />
+				</Route>
 			</Routes>
 			<ReactQueryDevtools />
 		</QueryClientProvider>
