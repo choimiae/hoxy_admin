@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import axios from "axios";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
@@ -23,6 +23,7 @@ function Join() {
 	}
 
 	const navigate = useNavigate();
+	const inputRef = useRef<HTMLInputElement[] | HTMLSelectElement[]>([]);
 
 	const [join, setJoin] = useState<JoinCheckType>({
 		id: "",
@@ -93,36 +94,42 @@ function Join() {
 			Toast.fire({
 				title: "아이디를 입력해 주세요."
 			});
+			inputRef.current[0].focus();
 			return false;
 		}
 		if(!password || password.trim() === "") {
 			Toast.fire({
 				title: "비밀번호를 입력해 주세요."
 			});
+			inputRef.current[1].focus();
 			return false;
 		}
 		if(!passwordConfirm || passwordConfirm.trim() === "") {
 			Toast.fire({
 				title: "비밀번호를 입력해 주세요."
 			});
+			inputRef.current[2].focus();
 			return false;
 		}
 		if(password.trim() !== passwordConfirm.trim()) {
 			Toast.fire({
 				title: "비밀번호가 일치하지 않아요."
 			});
+			inputRef.current[1].focus();
 			return false;
 		}
 		if(!storeIdx || storeIdx.trim() === "") {
 			Toast.fire({
 				title: "업체명을 선택하세요."
 			});
+			inputRef.current[3].focus();
 			return false;
 		}
 		if(!nickname || nickname.trim() === "") {
 			Toast.fire({
 				title: "닉네임을 입력해 주세요."
 			});
+			inputRef.current[4].focus();
 			return false;
 		}
 
@@ -141,19 +148,19 @@ function Join() {
 				<h2 className="text-slate-400 text-lg font-semibold mb-3">회원가입</h2>
 				<div className="mt-2 flex items-center">
 					<div className="basis-5/12">아이디</div>
-					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" value={id} onChange={joinInput}/>
+					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" value={id} ref={el => inputRef.current[0] = el!} onChange={joinInput}/>
 				</div>
 				<div className="mt-2 flex items-center">
 					<div className="basis-5/12">비밀번호</div>
-					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" value={password} onChange={joinInput}/>
+					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" value={password} ref={el => inputRef.current[1] = el!} onChange={joinInput}/>
 				</div>
 				<div className="mt-2 flex items-center">
 					<div className="basis-5/12">비밀번호 확인</div>
-					<input id="passwordConfirm" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="passwordConfirm" value={passwordConfirm} onChange={joinInput}/>
+					<input id="passwordConfirm" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="passwordConfirm" value={passwordConfirm} ref={el => inputRef.current[2] = el!} onChange={joinInput}/>
 				</div>
 				<div className="mt-2 flex items-center">
 					<div className="basis-5/12">업체명</div>
-					<select name="storeIdx" id="storeIdx" className="basis-full h-12 border border-x-gray-200 text-sm" value={storeIdx} onChange={joinInput}>
+					<select name="storeIdx" id="storeIdx" className="basis-full h-12 border border-x-gray-200 text-sm" value={storeIdx} ref={el => inputRef.current[3] = el!} onChange={joinInput}>
 						<option value="" disabled>업체명을 선택하세요.</option>
 						{
 							storeListDb?.map((item : StoreType) => {
@@ -164,7 +171,7 @@ function Join() {
 				</div>
 				<div className="mt-2 flex items-center">
 					<div className="basis-5/12">닉네임</div>
-					<input id="nickname" type="text" className="text-sm" placeholder="닉네임을 입력해 주세요." name="nickname" value={nickname} onChange={joinInput}/>
+					<input id="nickname" type="text" className="text-sm" placeholder="닉네임을 입력해 주세요." name="nickname" value={nickname} ref={el => inputRef.current[4] = el!} onChange={joinInput}/>
 				</div>
 				<div className="mt-6 flex items-center justify-center">
 					<button type="button" className="bg-lime-600 text-white h-12 px-10 mx-2" onClick={joinHandler}>회원가입</button>
