@@ -7,6 +7,8 @@ import Datepicker, {registerLocale, setDefaultLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ko from "date-fns/locale/ko";
 import {useMutation} from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import {alertConfirmClass} from "../../components/alert";
 registerLocale("ko", ko);
 setDefaultLocale("ko");
 
@@ -43,7 +45,14 @@ function ReserveStats() {
 
 	const {mutate:reserveStatsMutate, data:reserveStatsDb} = useMutation(reserveStatsDispatch, {
 		onError: (err => {
-			alert("오류 발생");
+			Swal.fire({
+				icon: "error",
+				text: "오류가 발생했어요.",
+				confirmButtonText: "확인",
+				customClass: {
+					confirmButton:alertConfirmClass,
+				}
+			});
 		})
 	})
 

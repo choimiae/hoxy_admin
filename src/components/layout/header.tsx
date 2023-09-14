@@ -3,6 +3,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userInfo} from "../user";
+import Swal from "sweetalert2";
+import {alertConfirmClass} from "../alert";
 
 function Header() {
 	const navigate = useNavigate();
@@ -10,8 +12,16 @@ function Header() {
 
 	const logoutHandler = () => {
 		userInfo.setUser({token: "", name: ""});
-		alert("로그아웃되었습니다.");
-		navigate("/");
+		Swal.fire({
+			icon: "success",
+			text: "로그아웃 되었어요.",
+			confirmButtonText: "확인",
+			customClass: {
+				confirmButton:alertConfirmClass,
+			}
+		}).then(() => {
+			navigate("/");
+		});
 	}
 
 	return(

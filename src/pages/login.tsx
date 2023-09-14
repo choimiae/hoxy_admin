@@ -3,6 +3,7 @@ import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
 import {NavLink, useNavigate} from "react-router-dom";
 import {userInfo} from "../components/user";
+import Swal from "sweetalert2";
 
 function Login() {
 	type UserType = {
@@ -32,29 +33,43 @@ function Login() {
 		return data;
 	}
 
-	const {mutate, isSuccess, isError} = useMutation(userLoginInfo, {
-		onSuccess: (data, variables, context) => {
+	const {mutate:loginMutate} = useMutation(userLoginInfo, {
+		onSuccess: (data) => {
 			const {token, name} = data;
 			userInfo.setUser({token: token, name: name});
 			navigate("/manage/reserve/list");
 
 		},
-		onError: (error, variables, context) => {
-			alert("계정 정보가 일치하지 않습니다.");
+		onError: (error) => {
+			Toast.fire({
+				title: "계정 정보가 일치하지 않습니다."
+			});
 		}
+	});
+
+	const Toast = Swal.mixin({
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: 2000,
+		icon: "error"
 	});
 
 	const login = () => {
 		if(!id || id.trim() === "") {
-			alert("아이디를 입력하세요.");
+			Toast.fire({
+				title: "아이디를 입력해 주세요."
+			});
 			return false;
 		}
 		if(!password || password.trim() === "") {
-			alert("비밀번호를 입력하세요.");
+			Toast.fire({
+				title: "비밀번호를 입력해 주세요."
+			});
 			return false;
 		}
 
-		mutate({ id: id, password: password });
+		loginMutate({ id: id, password: password });
 	}
 
 	return (

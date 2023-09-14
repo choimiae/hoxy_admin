@@ -13,6 +13,7 @@
 @layer base {
 	html {
 		font-family: 'NanumSquareNeo-Variable', system-ui, sans-serif;
+		box-sizing: border-box;
 	}
 	input[type="text"], input[type="password"], input[type="number"] {
 		@apply block w-full border h-12 px-2

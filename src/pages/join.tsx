@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import axios from "axios";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import {alertConfirmClass} from "../components/alert";
 
 function Join() {
 	type JoinType = {
@@ -55,37 +57,72 @@ function Join() {
 
 	const {mutate:joinMutate} = useMutation(joinDispatch, {
 		onSuccess: ((data) => {
-			alert(data);
-			navigate("/");
+			Swal.fire({
+				icon: "success",
+				text: data,
+				confirmButtonText: "확인",
+				customClass: {
+					confirmButton:alertConfirmClass,
+				}
+			}).then(() => {
+				navigate("/");
+			})
 		}),
 		onError: (error => {
-			alert(error);
+			Swal.fire({
+				icon: "success",
+				text: "오류가 발생했어요.",
+				confirmButtonText: "확인",
+				customClass: {
+					confirmButton:alertConfirmClass,
+				}
+			})
 		})
 	})
 
+	const Toast = Swal.mixin({
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: 2000,
+		icon: "error"
+	});
+
 	const joinHandler = () => {
 		if(!id || id.trim() === "") {
-			alert("아이디를 입력하세요.");
+			Toast.fire({
+				title: "아이디를 입력해 주세요."
+			});
 			return false;
 		}
 		if(!password || password.trim() === "") {
-			alert("비밀번호를 입력하세요.");
+			Toast.fire({
+				title: "비밀번호를 입력해 주세요."
+			});
 			return false;
 		}
 		if(!passwordConfirm || passwordConfirm.trim() === "") {
-			alert("비밀번호 확인을 입력하세요.");
+			Toast.fire({
+				title: "비밀번호를 입력해 주세요."
+			});
 			return false;
 		}
 		if(password.trim() !== passwordConfirm.trim()) {
-			alert("비밀번호가 일치하지 않습니다.");
+			Toast.fire({
+				title: "비밀번호가 일치하지 않아요."
+			});
 			return false;
 		}
 		if(!storeIdx || storeIdx.trim() === "") {
-			alert("업체명을 선택하세요.");
+			Toast.fire({
+				title: "업체명을 선택하세요."
+			});
 			return false;
 		}
 		if(!nickname || nickname.trim() === "") {
-			alert("닉네임을 입력하세요.");
+			Toast.fire({
+				title: "닉네임을 입력해 주세요."
+			});
 			return false;
 		}
 

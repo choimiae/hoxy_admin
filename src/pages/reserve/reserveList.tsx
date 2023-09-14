@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
-import {useMutation, useQuery} from "@tanstack/react-query"
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
 import Header from "../../components/layout/header";
 import Container from "../../components/layout/container";
 import Tab from "../../components/tab";
+import Swal from "sweetalert2";
+import {alertConfirmClass} from "../../components/alert";
 
 function ReserveList() {
 	type ReserveListType = {
@@ -18,6 +20,8 @@ function ReserveList() {
 		idx: Parameters<typeof reserveHandler>[0],
 		checkFlag: Parameters<typeof reserveHandler>[1]
 	}
+
+	const queryClient = useQueryClient();
 
 	const tabDb = [
 		{name: "예약 확인", link: "/manage/reserve/list", activeFlag: true},
@@ -38,10 +42,26 @@ function ReserveList() {
 
 	const {mutate:reserveCheckMutate} = useMutation(reserveCheckDispatch, {
 		onSuccess: ((data, variable) => {
-			alert(data);
+			const {checkFlag} = variable;
+			queryClient.invalidateQueries(["reserveList"]);
+			Swal.fire({
+				toast: true,
+				position: "top-end",
+				showConfirmButton: false,
+				timer: 2000,
+				icon: checkFlag ? "success" : "warning",
+				text: data,
+			});
 		}),
 		onError: (err => {
-			alert("오류 발생!!")
+			Swal.fire({
+				icon: "error",
+				text: "오류가 발생했어요.",
+				confirmButtonText: "확인",
+				customClass: {
+					confirmButton:alertConfirmClass,
+				}
+			});
 		})
 	})
 
