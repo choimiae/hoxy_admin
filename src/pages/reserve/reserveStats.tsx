@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import Header from "../../components/layout/header";
 import Tab from "../../components/tab";
@@ -6,9 +6,8 @@ import Container from "../../components/layout/container";
 import Datepicker, {registerLocale, setDefaultLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ko from "date-fns/locale/ko";
-import {useMutation} from "@tanstack/react-query";
-import Swal from "sweetalert2";
-import {alertConfirmClass} from "../../components/alert";
+import {useQuery} from "@tanstack/react-query";
+import Paging from "../../components/paging";
 registerLocale("ko", ko);
 setDefaultLocale("ko");
 
@@ -23,38 +22,30 @@ function ReserveStats() {
 	}
 
 	const [startDt, setStartDt] = useState<Date>(new Date());
+	const [paging, setPaging] = useState<number>(1)
+	const [total, setTotal] = useState<number>(0);
 
 	const tabDb = [
 		{name: "예약 확인", link: "/manage/reserve/list", activeFlag: false},
 		{name: "예약 통계", link: "/manage/reserve/stats", activeFlag: true}
 	]
 
-	useEffect(() => {
-		reserveStatsMutate(startDt);
-	}, [])
-
 	const dateHandler = (data: Date) => {
 		setStartDt(data);
-		reserveStatsMutate(data);
+		setPaging(1);
 	}
 
-	const reserveStatsDispatch = async (date:Date) => {
-		const {data} = await axios.post("/manage/reserve/stats", date);
+	const reserveStatsDispatch = async () => {
+		const {data} = await axios.post("/manage/reserve/stats", {startDt, paging});
+		setTotal(data.length);
 		return data;
 	}
 
-	const {mutate:reserveStatsMutate, data:reserveStatsDb} = useMutation(reserveStatsDispatch, {
-		onError: (err => {
-			Swal.fire({
-				icon: "error",
-				text: "오류가 발생했어요.",
-				confirmButtonText: "확인",
-				customClass: {
-					confirmButton:alertConfirmClass,
-				}
-			});
-		})
-	})
+	const {data : reserveStatsDb} = useQuery(["reserveStatsList", startDt, paging], reserveStatsDispatch, {keepPreviousData: true});
+
+	const pagingHandler = (index:number) => {
+		setPaging(index);
+	}
 
 	return (
 		<Container>
@@ -103,6 +94,7 @@ function ReserveStats() {
 					</tbody>
 				</table>
 			</section>
+			<Paging totalPage={total} currentPage={paging} setPage={10} handler={pagingHandler} />
 		</Container>
 	)
 }

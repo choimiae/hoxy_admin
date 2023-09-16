@@ -98,7 +98,8 @@ export const handlers = [
 
 	// 예약 통계 목록 조회
 	rest.post("/manage/reserve/stats", (req:any, res:any, ctx:any) => {
-		const changeFormat = new Date(req.body).toISOString().split("T")[0];
+		const {startDt, paging} = req.body;
+		const changeFormat = new Date(startDt).toISOString().split("T")[0];
 		const reserveStatsListFilter = reserveStatsList.filter(item => new Date(item.date).toISOString().split("T")[0] === changeFormat);
 
 		return res(ctx.status(201), ctx.json(reserveStatsListFilter));
