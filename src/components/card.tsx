@@ -2,7 +2,7 @@ import React from "react";
 
 type CardType = {
 	children: React.ReactNode,
-	addClassName: string | null
+	addClassName?: string
 }
 
 function Card(info : CardType) {

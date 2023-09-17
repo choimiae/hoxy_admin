@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import Header from "../../components/layout/header";
 import Container from "../../components/layout/container";
-import Tab from "../../components/tab";
 import Swal from "sweetalert2";
 import {alertConfirmClass} from "../../components/alert";
+import Card from "../../components/card";
 
 function ReserveList() {
 	type ReserveListType = {
@@ -22,11 +21,6 @@ function ReserveList() {
 	}
 
 	const queryClient = useQueryClient();
-
-	const tabDb = [
-		{name: "예약 확인", link: "/manage/reserve/list", activeFlag: true},
-		{name: "예약 통계", link: "/manage/reserve/stats", activeFlag: false}
-	]
 
 	const reserveListDispatch = async () => {
 		const res = await axios.get("/manage/reserve/list");
@@ -70,10 +64,8 @@ function ReserveList() {
 	}
 
 	return (
-		<Container>
-			<Header/>
-			<section>
-				<Tab data={tabDb}/>
+		<Container title="예약 확인">
+			<Card>
 				<table className="table-fixed text-center w-full">
 					<colgroup>
 						<col style={{width: "10%"}}/>
@@ -84,13 +76,13 @@ function ReserveList() {
 						<col style={{width: "auto"}}/>
 					</colgroup>
 					<thead>
-						<tr className="bg-gray-100 border-y border-slate-200">
-							<th className="px-2 py-3">No</th>
-							<th className="px-2 py-3">이름</th>
-							<th className="px-2 py-3">핸드폰 번호</th>
-							<th className="px-2 py-3">예약 인원</th>
-							<th className="px-2 py-3">예약 시간</th>
-							<th className="px-2 py-3">예약 처리</th>
+						<tr className="bg-gray-50 border-y border-slate-200">
+							<th className="px-2 py-3 font-medium">No</th>
+							<th className="px-2 py-3 font-medium">이름</th>
+							<th className="px-2 py-3 font-medium">핸드폰 번호</th>
+							<th className="px-2 py-3 font-medium">예약 인원</th>
+							<th className="px-2 py-3 font-medium">예약 시간</th>
+							<th className="px-2 py-3 font-medium">예약 처리</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -104,8 +96,8 @@ function ReserveList() {
 									<td className="px-2 py-3">{Number(item.count)}명</td>
 									<td className="px-2 py-3">{item.date}</td>
 									<td className="px-2 py-3">
-										<button type="button" className="text-white bg-slate-500 h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, true)}}>예약 수락</button>
-										<button type="button" className="text-white bg-gray-300 h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, false)}}>예약 거절</button>
+										<button type="button" className="text-white bg-gray-400 h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, true)}}>예약 수락</button>
+										<button type="button" className="text-gray-500 border-gray-300 border h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, false)}}>예약 거절</button>
 									</td>
 								</tr>
 							)
@@ -113,7 +105,7 @@ function ReserveList() {
 					}
 					</tbody>
 				</table>
-			</section>
+			</Card>
 		</Container>
 	)
 }

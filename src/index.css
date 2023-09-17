@@ -22,6 +22,6 @@
 
 @layer components {
 	.logo {
-		@apply bg-lime-600 text-white text-base px-2 py-1.5 rounded mx-2 rotate-6;
+		@apply bg-lime-600 text-white text-xs px-1 py-1 rounded mx-2 rotate-6;
 	}
 }

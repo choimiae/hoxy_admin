@@ -1,14 +1,23 @@
 import React from "react";
+import Header from "./header";
+import Nav from "./nav";
 
 type ContainerType = {
-	children: React.ReactNode
+	children: React.ReactNode,
+	title?: string
 }
 
-function Container({children} : ContainerType) {
+function Container(info : ContainerType) {
+	const {children, title} = info;
 
 	return (
-		<main className="px-8 py-8">
-			{children}
+		<main className="block content h-full min-h-screen bg-gray-100">
+			<Header/>
+			<Nav/>
+			<section className="px-9 py-7 text-sm">
+				{title ? <h2 className="mb-4 font-semibold text-base">{title}</h2> : ""}
+				{children}
+			</section>
 		</main>
 	)
 }
