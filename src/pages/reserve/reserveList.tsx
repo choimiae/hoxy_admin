@@ -20,6 +20,7 @@ function ReserveList() {
 		checkFlag: Parameters<typeof reserveHandler>[1]
 	}
 
+	const title = "예약 확인";
 	const queryClient = useQueryClient();
 
 	const reserveListDispatch = async () => {
@@ -64,7 +65,7 @@ function ReserveList() {
 	}
 
 	return (
-		<Container title="예약 확인">
+		<Container title={title}>
 			<Card>
 				<table className="table-fixed text-center w-full">
 					<colgroup>
@@ -87,21 +88,24 @@ function ReserveList() {
 					</thead>
 					<tbody>
 					{
-						reserveListDb?.map((item : ReserveListType, index : number) => {
-							return (
-								<tr className="border-b border-slate-100" key={index}>
-									<td className="px-2 py-3">{reserveListDb.length - index}</td>
-									<td className="px-2 py-3">{item.name}</td>
-									<td className="px-2 py-3">{item.phone}</td>
-									<td className="px-2 py-3">{Number(item.count)}명</td>
-									<td className="px-2 py-3">{item.date}</td>
-									<td className="px-2 py-3">
-										<button type="button" className="text-white bg-gray-400 h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, true)}}>예약 수락</button>
-										<button type="button" className="text-gray-500 border-gray-300 border h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, false)}}>예약 거절</button>
-									</td>
-								</tr>
-							)
-						})
+						reserveListDb && reserveListDb.length > 0 ?
+							reserveListDb.map((item : ReserveListType, index : number) => {
+								return (
+									<tr className="border-b border-slate-100" key={index}>
+										<td className="px-2 py-3">{reserveListDb.length - index}</td>
+										<td className="px-2 py-3">{item.name}</td>
+										<td className="px-2 py-3">{item.phone}</td>
+										<td className="px-2 py-3">{Number(item.count)}명</td>
+										<td className="px-2 py-3">{item.date}</td>
+										<td className="px-2 py-3">
+											<button type="button" className="text-white bg-gray-400 h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, true)}}>예약 수락</button>
+											<button type="button" className="text-gray-500 border-gray-300 border h-7 text-xs px-2 mx-1" onClick={() => {reserveHandler(item.idx, false)}}>예약 거절</button>
+										</td>
+									</tr>
+								)
+							})
+						:
+							<tr className="border-b border-gray-100"><td className="px-2 py-3" colSpan={6}>목록이 없어요.</td></tr>
 					}
 					</tbody>
 				</table>

@@ -17,7 +17,7 @@ function Paging(info : PagingType) {
 					<button
 						type="button"
 						key={index + 1}
-						className={`h-10 px-4 border border-slate-200 text-slate-400 mx-1 ${(index + 1) === currentPage ? "bg-slate-500 text-white" : ""}`}
+						className={`h-10 px-4 border border-gray-200 text-gray-400 mx-1 bg-white ${(index + 1) === currentPage ? "bg-gray-500 text-white" : ""}`}
 						onClick={() => {handler(index + 1);}}
 					>
 						{index + 1}
