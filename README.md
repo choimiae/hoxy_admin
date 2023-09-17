@@ -2,7 +2,7 @@
 
 직접 방문 전에 미리 줄 서기!<br/>
 ex) 테이블링 <br/> <br/>
-https://hoxy-admin.web.app
+[https://hoxy-admin.web.app](https://hoxy-admin.web.app)
 <br/><br/>
 ## 💻 Function 💻
 1. 회원가입
