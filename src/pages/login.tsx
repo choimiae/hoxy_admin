@@ -78,21 +78,24 @@ function Login() {
 	}
 
 	return (
-		<main className="flex items-center justify-center h-screen text-center bg-slate-50">
-			<div className="inline-flex flex-col basis-2/6">
-				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
-				<h2 className="text-slate-400 text-lg font-semibold mb-3">관리자 시스템</h2>
-				<div className="mt-2">
-					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" ref={el => inputRef.current[0] = el!} value={id} onChange={changeUser}/>
-				</div>
-				<div className="mt-2">
-					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" ref={el => inputRef.current[1] = el!} value={password} onChange={changeUser}/>
+		<main className="flex items-center justify-center h-screen text-center bg-slate-100">
+			<div className="inline-flex flex-col basis-96">
+				<h1 className="text-3xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
+				<div className="px-9 py-11 bg-white mt-8 rounded shadow-sm">
+					<h2 className="text-slate-400 text-lg font-semibold mb-6">관리자 로그인</h2>
+					<div>
+						<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" ref={el => inputRef.current[0] = el!} value={id} onChange={changeUser}/>
+					</div>
+					<div className="mt-2">
+						<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" ref={el => inputRef.current[1] = el!} value={password} onChange={changeUser}/>
+					</div>
+					<div className="mt-6">
+						<button type="button" className="bg-lime-600 text-white w-full h-12" onClick={login}>로그인</button>
+					</div>
 				</div>
 				<div className="mt-6">
-					<button type="button" className="bg-lime-600 text-white w-full h-12" onClick={login}>로그인</button>
-				</div>
-				<div className="mt-6">
-					<NavLink to="/manage/join" className="underline text-gray-500">회원가입</NavLink>
+					<span className="text-slate-400	">회원이 아니신가요?</span>
+					<NavLink to="/manage/join" className="underline text-gray-500 ml-3">회원가입</NavLink>
 				</div>
 			</div>
 		</main>
