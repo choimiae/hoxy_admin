@@ -142,40 +142,43 @@ function Join() {
 	}
 
 	return(
-		<main className="flex items-center justify-center h-screen text-center bg-slate-50">
-			<div className="inline-flex flex-col basis-2/6">
-				<h1 className="text-3xl text-lime-500 font-black mb-2 flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
-				<h2 className="text-slate-400 text-lg font-semibold mb-3">회원가입</h2>
-				<div className="mt-2 flex items-center">
-					<div className="basis-5/12">아이디</div>
-					<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" value={id} ref={el => inputRef.current[0] = el!} onChange={joinInput}/>
+		<main className="flex items-center justify-center h-screen bg-slate-100">
+			<div className="inline-flex flex-col basis-96">
+				<h1 className="text-3xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
+				<div className="px-9 py-11 bg-white mt-8 rounded shadow-sm">
+					<h2 className="text-slate-400 text-lg font-semibold mb-6 text-center">회원가입</h2>
+					<div className="text-sm">
+						<label htmlFor="id" className="mb-1 block">아이디</label>
+						<input id="id" type="text" placeholder="아이디를 입력해 주세요." name="id" value={id} ref={el => inputRef.current[0] = el!} onChange={joinInput}/>
+					</div>
+					<div className="mt-4 text-sm">
+						<label htmlFor="password" className="mb-1 block">비밀번호</label>
+						<input id="password" type="password" placeholder="비밀번호를 입력해 주세요." name="password" value={password} ref={el => inputRef.current[1] = el!} onChange={joinInput}/>
+					</div>
+					<div className="mt-4 text-sm">
+						<label htmlFor="passwordConfirm" className="mb-1 block">비밀번호 확인</label>
+						<input id="passwordConfirm" type="password" placeholder="비밀번호를 입력해 주세요." name="passwordConfirm" value={passwordConfirm} ref={el => inputRef.current[2] = el!} onChange={joinInput}/>
+					</div>
+					<div className="mt-4 text-sm">
+						<label htmlFor="storeIdx" className="mb-1 block">업체명</label>
+						<select name="storeIdx" id="storeIdx" className="w-full h-12 border border-x-gray-200" value={storeIdx} ref={el => inputRef.current[3] = el!} onChange={joinInput}>
+							<option value="" disabled>업체명을 선택하세요.</option>
+							{
+								storeListDb?.map((item : StoreType) => {
+									return <option key={item.idx} value={item.idx}>{item.name}</option>
+								})
+							}
+						</select>
+					</div>
+					<div className="mt-4 text-sm">
+						<label htmlFor="nickname" className="mb-1 block">닉네임</label>
+						<input id="nickname" type="text" className="text-sm" placeholder="닉네임을 입력해 주세요." name="nickname" value={nickname} ref={el => inputRef.current[4] = el!} onChange={joinInput}/>
+					</div>
+					<button type="button" className="mt-6 bg-lime-600 text-white h-12 px-10 w-full" onClick={joinHandler}>회원가입</button>
 				</div>
-				<div className="mt-2 flex items-center">
-					<div className="basis-5/12">비밀번호</div>
-					<input id="password" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="password" value={password} ref={el => inputRef.current[1] = el!} onChange={joinInput}/>
-				</div>
-				<div className="mt-2 flex items-center">
-					<div className="basis-5/12">비밀번호 확인</div>
-					<input id="passwordConfirm" type="password" className="text-sm" placeholder="비밀번호를 입력해 주세요." name="passwordConfirm" value={passwordConfirm} ref={el => inputRef.current[2] = el!} onChange={joinInput}/>
-				</div>
-				<div className="mt-2 flex items-center">
-					<div className="basis-5/12">업체명</div>
-					<select name="storeIdx" id="storeIdx" className="basis-full h-12 border border-x-gray-200 text-sm" value={storeIdx} ref={el => inputRef.current[3] = el!} onChange={joinInput}>
-						<option value="" disabled>업체명을 선택하세요.</option>
-						{
-							storeListDb?.map((item : StoreType) => {
-								return <option key={item.idx} value={item.idx}>{item.name}</option>
-							})
-						}
-					</select>
-				</div>
-				<div className="mt-2 flex items-center">
-					<div className="basis-5/12">닉네임</div>
-					<input id="nickname" type="text" className="text-sm" placeholder="닉네임을 입력해 주세요." name="nickname" value={nickname} ref={el => inputRef.current[4] = el!} onChange={joinInput}/>
-				</div>
-				<div className="mt-6 flex items-center justify-center">
-					<button type="button" className="bg-lime-600 text-white h-12 px-10 mx-2" onClick={joinHandler}>회원가입</button>
-					<NavLink to="/" className="bg-gray-300 text-white h-12 px-10 inline-flex items-center mx-2">취소</NavLink>
+				<div className="mt-6 text-center">
+					<span className="text-slate-400">이미 회원이신가요?</span>
+					<NavLink to="/" className="underline text-gray-500 ml-3">로그인</NavLink>
 				</div>
 			</div>
 		</main>
