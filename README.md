@@ -19,7 +19,7 @@ ex) 테이블링
 
 ## 📷 Screen Shot 📷
 <div>
-  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/182e5fb8-d83c-41c5-85a0-865157a6f82b" width="320"/>
-  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/8add80c5-ec96-4a34-9cbb-20ecb34226f0" width="320" />
-  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/a735ecb6-99b1-4d72-a183-c86f4e1ab600" width="320" />
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/15ea1c93-25ca-4260-8ad7-fdc6dae81285" width="320"/>
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/59737f79-4a80-4b51-9854-c960bd4579d4" width="320" />
+  <img src="https://github.com/choimiae/hoxy_admin/assets/93104994/6d06995a-1dba-431f-a94c-59c86f30ac47" width="320" />
 </div>
