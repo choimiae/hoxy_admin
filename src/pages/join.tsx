@@ -142,11 +142,11 @@ function Join() {
 	}
 
 	return(
-		<main className="flex items-center justify-center h-screen bg-slate-100">
+		<main className="flex items-center justify-center h-screen bg-gray-100">
 			<div className="inline-flex flex-col basis-96">
 				<h1 className="text-3xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<div className="px-9 py-11 bg-white mt-8 rounded shadow-sm">
-					<h2 className="text-slate-400 text-lg font-semibold mb-6 text-center">회원가입</h2>
+					<h2 className="text-gray-400 text-lg font-semibold mb-6 text-center">회원가입</h2>
 					<div className="text-sm">
 						<label htmlFor="id" className="mb-1 block">아이디</label>
 						<input id="id" type="text" placeholder="아이디를 입력해 주세요." name="id" value={id} ref={el => inputRef.current[0] = el!} onChange={joinInput}/>
@@ -177,7 +177,7 @@ function Join() {
 					<button type="button" className="mt-6 bg-lime-600 text-white h-12 px-10 w-full" onClick={joinHandler}>회원가입</button>
 				</div>
 				<div className="mt-6 text-center">
-					<span className="text-slate-400">이미 회원이신가요?</span>
+					<span className="text-gray-400">이미 회원이신가요?</span>
 					<NavLink to="/" className="underline text-gray-500 ml-3">로그인</NavLink>
 				</div>
 			</div>

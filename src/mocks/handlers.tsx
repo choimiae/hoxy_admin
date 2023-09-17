@@ -80,7 +80,7 @@ export const handlers = [
 	rest.post("/manage/join", (req:any, res:any, ctx:any) => {
 		const {nickname} = req.body;
 
-		return res(ctx.status(201), ctx.json(`${nickname}님 회원가입이 완료되었습니다.`));
+		return res(ctx.status(201), ctx.json(`${nickname}님 회원가입이 완료되었어요.`));
 	}),
 
 	// 예약 목록 조회
@@ -93,7 +93,7 @@ export const handlers = [
 		const {idx, checkFlag} = req.body;
 		reserveList = reserveList.filter(item => item.idx !== idx);
 
-		return res(ctx.status(201), ctx.json(`${idx} 예약 건이 ${checkFlag ? "수락" : "거절"}되었습니다.`));
+		return res(ctx.status(201), ctx.json(`${idx} 예약 건이 ${checkFlag ? "수락" : "거절"}되었어요.`));
 	}),
 
 	// 예약 통계 목록 조회

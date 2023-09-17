@@ -44,7 +44,7 @@ function Login() {
 		},
 		onError: (error) => {
 			Toast.fire({
-				title: "계정 정보가 일치하지 않습니다."
+				title: "계정 정보가 일치하지 않아요."
 			});
 			inputRef.current[0].focus();
 		}
@@ -78,11 +78,11 @@ function Login() {
 	}
 
 	return (
-		<main className="flex items-center justify-center h-screen text-center bg-slate-100">
+		<main className="flex items-center justify-center h-screen text-center bg-gray-100">
 			<div className="inline-flex flex-col basis-96">
 				<h1 className="text-3xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
 				<div className="px-9 py-11 bg-white mt-8 rounded shadow-sm">
-					<h2 className="text-slate-400 text-lg font-semibold mb-6">관리자 로그인</h2>
+					<h2 className="text-gray-400 text-lg font-semibold mb-6">관리자 로그인</h2>
 					<div>
 						<input id="id" type="text" className="text-sm" placeholder="아이디를 입력해 주세요." name="id" ref={el => inputRef.current[0] = el!} value={id} onChange={changeUser}/>
 					</div>
@@ -94,7 +94,7 @@ function Login() {
 					</div>
 				</div>
 				<div className="mt-6">
-					<span className="text-slate-400	">회원이 아니신가요?</span>
+					<span className="text-gray-400">회원이 아니신가요?</span>
 					<NavLink to="/manage/join" className="underline text-gray-500 ml-3">회원가입</NavLink>
 				</div>
 			</div>

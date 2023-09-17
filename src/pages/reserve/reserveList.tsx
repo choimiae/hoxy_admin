@@ -77,7 +77,7 @@ function ReserveList() {
 						<col style={{width: "auto"}}/>
 					</colgroup>
 					<thead>
-						<tr className="bg-gray-50 border-y border-slate-200">
+						<tr className="bg-gray-50 border-y border-gray-200">
 							<th className="px-2 py-3 font-medium">No</th>
 							<th className="px-2 py-3 font-medium">이름</th>
 							<th className="px-2 py-3 font-medium">핸드폰 번호</th>
@@ -91,7 +91,7 @@ function ReserveList() {
 						reserveListDb && reserveListDb.length > 0 ?
 							reserveListDb.map((item : ReserveListType, index : number) => {
 								return (
-									<tr className="border-b border-slate-100" key={index}>
+									<tr className="border-b border-gray-100" key={index}>
 										<td className="px-2 py-3">{reserveListDb.length - index}</td>
 										<td className="px-2 py-3">{item.name}</td>
 										<td className="px-2 py-3">{item.phone}</td>
