@@ -4,6 +4,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import {alertConfirmClass} from "../components/alert";
+import Card from "../components/card";
 
 function Join() {
 	type JoinType = {
@@ -144,8 +145,8 @@ function Join() {
 	return(
 		<main className="flex items-center justify-center h-screen bg-gray-100">
 			<div className="inline-flex flex-col basis-96">
-				<h1 className="text-3xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
-				<div className="px-9 py-11 bg-white mt-8 rounded shadow-sm">
+				<h1 className="text-2xl text-lime-500 font-black flex items-center justify-center"><span className="logo">Hoxy</span>예약되나요?</h1>
+				<Card addClassName="px-9 py-11 bg-white mt-8 rounded shadow-sm">
 					<h2 className="text-gray-400 text-lg font-semibold mb-6 text-center">회원가입</h2>
 					<div className="text-sm">
 						<label htmlFor="id" className="mb-1 block">아이디</label>
@@ -175,7 +176,7 @@ function Join() {
 						<input id="nickname" type="text" className="text-sm" placeholder="닉네임을 입력해 주세요." name="nickname" value={nickname} ref={el => inputRef.current[4] = el!} onChange={joinInput}/>
 					</div>
 					<button type="button" className="mt-6 bg-lime-600 text-white h-12 px-10 w-full" onClick={joinHandler}>회원가입</button>
-				</div>
+				</Card>
 				<div className="mt-6 text-center">
 					<span className="text-gray-400">이미 회원이신가요?</span>
 					<NavLink to="/" className="underline text-gray-500 ml-3">로그인</NavLink>

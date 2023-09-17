@@ -19,7 +19,7 @@ const navDb = [
 
 function Nav() {
 	return(
-		<nav className="px-8 bg-white shadow-sm	">
+		<nav className="px-8 bg-white shadow-sm">
 			{
 				navDb.map((item: NavType, index:number) => (
 					<NavLink key={index} to={item.link}  className={({ isActive }) => isActive ? "text-lime-500 underline px-4 inline-flex items-center justify-center h-14" : "text-gray-600 px-4 inline-flex items-center justify-center h-14"}>{item.name}</NavLink>
